@@ -1,3 +1,5 @@
+/////////////////Morris Kimani
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -34,7 +36,7 @@ public class Q_1 {
 
         //3. check their progression to determine inconsistencies
         int initProgression = 0; //will hold the first progression in the series of numbers
-        int deviatedProgression = 0; //will hold the subsequent progression in the series
+        int nextProgression = 0; //will hold the subsequent progression in the series
         int counter2 = 0;
 
         for (int i = 0; i < (arraySize -1); i++){
@@ -53,23 +55,53 @@ public class Q_1 {
                     counter++;//will give us how many times this progression occured
 
                 } else {
-                    deviatedProgression = x;
+                    nextProgression = x;
                     counter2++;
                 }//end of if.. else
 
             }// end of if..else
 
-            //check which progression occured more and at what point
-            if (counter > counter2){
-                System.out.println("The initial progression "+ initProgression + " occured " + counter+ " times");
-            } else {
-                System.out.println("The dev progression "+ deviatedProgression + " occured " + counter2+ " times");
-            }//end if.. else
-        }
+        }//end for loop
 
+        //check which progression occurred more and at what point
+        if (nextProgression == 0) {
+            //in this case, there was no anomally
+            System.out.println("There was no missing number in the array");
 
-        //4. spit out the missing number
+        } else if (counter > counter2){
+            System.out.println("The initial progression "+ initProgression + " occured " + counter+ " times");
 
+            //go back and find where the anomaly happened, it will be the least occurring progression
+            int x1 = 0; //will hold the difference we find through the second cycle
+            int y = 0; //will hold the index for the array
+
+            while(x1 != nextProgression){
+                x1 = array[y + 1] - array[y];
+                y++;
+            }
+
+            System.out.println("int where the anomaly occurred is after" + array[y]);
+
+            //print out the missing number
+            System.out.println("The missing number is ==> " + (array[y] + 1));
+
+        }else {
+            System.out.println("The next progression "+ nextProgression + " occured " + counter2+ " times");
+
+            //go back and find where the anomaly happened
+            int x1 = 0; //will hold the difference we find through the second cycle
+            int y = 0; //will hold the index for the array
+
+            while(x1 != initProgression){
+                x1 = array[y + 1] - array[y];
+                y++;
+            }
+
+            System.out.println("int where anomaly occurred is before " + array[y]);
+
+            //print out the missing number
+            System.out.println("The missing number is ==> " + (array[y] - 1));
+        }//end if.. else
 
     }//end of main method
 }
