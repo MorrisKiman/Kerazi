@@ -1,0 +1,59 @@
+--NB, you can just copy these contents and paste them in your sql console, they'll run perfectly
+
+--create the database
+create database education;
+
+--use the database
+use education;
+
+--create the tables
+create table institution(
+    institutionid int(11) not null primary key auto_increment,
+    name varchar(250) not null
+);
+
+create table course(
+    courseid int(11) not null primary key auto_increment,
+    name varchar(250) not null,
+    institution int(11) not null,
+    FOREIGN KEY (institution) REFERENCES institution(institutionid)
+);
+
+create table student (
+    studentid int(11) not null primary key auto_increment,
+    name varchar(250) not null,
+    course int(11) not null,
+    FOREIGN KEY (course) REFERENCES course(courseid)
+);
+
+--sample data
+
+insert into institution (name) values
+("University Of State"),
+("Kenya College of Accountancy"),
+("Artisan College");
+
+insert into course (name, institution ) values
+("Networking", 1),
+("Rocks Identification", 1),
+("Accounting 1", 2),
+("Basic IT", 2),
+("Pottery", 3),
+("Plumbing", 3);
+
+insert into student (name, course) values
+("Cleophas Mayaga", 4),
+("Christine Oyoo", 3),
+("Edgar Obare", 4),
+("Ring Tone", 2),
+("Aspe Neymo", 3),
+("Potly Bu", 3),
+("Alex Kimathi", 4),
+("Esther Ngamau", 2),
+("Swissy Dissy", 5),
+("Erika Too", 5),
+("Denta Lipo", 6),
+("Sucre Doh", 5),
+("Mayoo Machosi", 5);
+
+--end of sql script

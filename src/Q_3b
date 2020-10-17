@@ -1,0 +1,7 @@
+SELECT distinct institution.name AS "Institution Name", course.name AS "Course",
+(select count(*) from student where course = course.courseid) as "Number of Students"
+FROM institution INNER JOIN course
+ON institution.institutionid = course.institution
+INNER JOIN student ON student.course = course.courseid;
+
+--end of sql script
